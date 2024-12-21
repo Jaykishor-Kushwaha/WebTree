@@ -1,5 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaSquareXTwitter } from "react-icons/fa6";
 import { Text } from "@mantine/core";
+
+interface SocialIconProps {
+  platform: "github" | "linkedin" | "x";
+}
+
+const SocialIcon: React.FC<SocialIconProps> = ({ platform }) => {
+  switch (platform) {
+    case "github":
+      return <FaGithub className="icon" />;
+    case "linkedin":
+      return <FaLinkedin className="icon" />;
+    case "x":
+      return <FaSquareXTwitter className="icon" />;
+    default:
+      return null;
+  }
+};
 
 interface ProfileStats {
   issuesResolved?: number;
@@ -15,6 +34,10 @@ export interface DevCardProps {
   startDate?: string;
   avatarUrl?: string;
   stats?: ProfileStats;
+  socialLinks: {
+    platform: "github" | "linkedin" | "x";
+    url: string;
+  }[];
 }
 
 interface Name {
@@ -52,7 +75,9 @@ interface User {
   picture: Picture;
 }
 
-const DevCard: React.FC = () => {
+const DevCard: React.FC = ({
+
+}) => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -93,16 +118,19 @@ const DevCard: React.FC = () => {
     const card = e.currentTarget;
     card.style.transform = "perspective(1500px) rotateX(0deg) rotateY(0deg)";
   };
-
   return (
     <div
       className="card-container card"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
+      {/* Glass Overlay */}
       <div className="glass-overlay"></div>
 
+      {/* Content */}
+
       <div className="card-content">
+        {/* Profile Text */}
         <div className="profile-text">
           <Text size="lg" className="text-cyan-400 profile-header">
             <img
@@ -116,7 +144,12 @@ const DevCard: React.FC = () => {
               <div>{user?.name.last}</div>
             </div>
           </Text>
+          {/* <Text size="sm" color="dimmed">
+            {user?.email}
+          </Text> */}
 
+
+          {/* Stats */}
           <div style={{ marginTop: "1.5rem" }}>
             <table className="w-full text-sm">
               <tbody>
@@ -136,8 +169,28 @@ const DevCard: React.FC = () => {
             </table>
           </div>
         </div>
+        <div className="socialwrapper">
+          <div className="social-container link-style">
+            <FaGithub className="icon" />
+            <FaLinkedin className="icon" />
+            <FaSquareXTwitter className="icon" />
+          </div>
+          <a
+            href=""
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-style"
+          >
+            <img
+              src="https://app.opire.dev/opire_logo.svg"
+              alt="avatar"
+              className="logo"
+            />
+          </a>
+        </div>
       </div>
 
+      {/* verticle line with dashed border */}
       <div className="vertical-line"></div>
     </div>
   );
