@@ -118,19 +118,16 @@ const DevCard: React.FC = ({
     const card = e.currentTarget;
     card.style.transform = "perspective(1500px) rotateX(0deg) rotateY(0deg)";
   };
+
   return (
     <div
       className="card-container card"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Glass Overlay */}
       <div className="glass-overlay"></div>
 
-      {/* Content */}
-
       <div className="card-content">
-        {/* Profile Text */}
         <div className="profile-text">
           <Text size="lg" className="text-cyan-400 profile-header">
             <img
@@ -144,12 +141,7 @@ const DevCard: React.FC = ({
               <div>{user?.name.last}</div>
             </div>
           </Text>
-          {/* <Text size="sm" color="dimmed">
-            {user?.email}
-          </Text> */}
-
-
-          {/* Stats */}
+         
           <div style={{ marginTop: "1.5rem" }}>
             <table className="w-full text-sm">
               <tbody>
@@ -171,9 +163,10 @@ const DevCard: React.FC = ({
         </div>
         <div className="socialwrapper">
           <div className="social-container link-style">
-            <FaGithub className="icon" />
-            <FaLinkedin className="icon" />
-            <FaSquareXTwitter className="icon" />
+            {/* Use SocialIcon component */}
+            <SocialIcon platform="github" />
+            <SocialIcon platform="linkedin" />
+            <SocialIcon platform="x" />
           </div>
           <a
             href=""
@@ -182,7 +175,7 @@ const DevCard: React.FC = ({
             className="link-style"
           >
             <img
-              src="https://app.opire.dev/opire_logo.svg"
+              src="https://internshala-uploads.internshala.com/logo/63e478bb5f3871675917499.jpg.webp"
               alt="avatar"
               className="logo"
             />
@@ -190,7 +183,6 @@ const DevCard: React.FC = ({
         </div>
       </div>
 
-      {/* verticle line with dashed border */}
       <div className="vertical-line"></div>
     </div>
   );
